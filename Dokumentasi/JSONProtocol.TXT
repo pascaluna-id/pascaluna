@@ -1,0 +1,59 @@
+Protocol menggunakan JSON (textmode).
+Tiap paket dibedakan dengan separator/terminator karakter ASCII #0 (NULL, nil).
+
+Contoh:
+
+(paket 1)#0(paket 2)#0
+
+Paket dari client ======================================================================
+
+MASUK GLOBAL ROOM (1)
+---------------------
+
+{
+	"cmd": 1,
+	"username": "Someone"
+}
+
+KELUAR GLOBAL ROOM (2)
+----------------------
+
+{
+	"cmd": 2
+}
+
+MENGIRIM PESAN KE GLOBAL ROOM (3)
+------------------------------
+
+{
+	"cmd": 3,
+	"msg": "Hello world!"
+}
+
+paket dari server ======================================================================
+
+SESEORANG MASUK KE GLOBAL ROOM (501)
+------------------------------
+
+{
+	"cmd": 501,
+	"username" : "Someone"
+}
+
+SESEORANG KELUAR DARI GLOBAL ROOM (502)
+------------------------------
+
+{
+	"cmd": 502,
+	"username" : "Someone"
+}
+
+SESEORANG MENGIRIM PESAN GLOBAL ROOM (503)
+------------------------------
+
+{
+	"cmd": 503,
+	"username" : "Someone"
+	"msg": "Hello world!"
+}
+
