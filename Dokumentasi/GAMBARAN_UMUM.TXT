@@ -8,7 +8,8 @@ Fitur:						Berkirim pesan, chat room, contact management, file transfer,
 							emoji, dan lain-lain.
 Aplikasi sejenis:			Skype, Telegram, dan lain-lain.
 Compiler:					Lazarus, FPC.
-Teknologi yang digunakan:	VCL, Socket.
+Teknologi yang digunakan:	VCL, Socket, JSON.
+Protocol:					JSON (text-based protocol)
 Komponen:					Pascaluna, aplikasi client yang akan dipakai end-user (frontend).
 							Pascaluna Server, aplikasi server yang digunakan untuk komunikasi
 							antar client.
