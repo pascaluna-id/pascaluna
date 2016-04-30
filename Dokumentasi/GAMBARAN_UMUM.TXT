@@ -4,7 +4,7 @@ GAMBARAN UMUM
 Nama aplikasi: 				Pascaluna
 Deskripsi:					Aplikasi instant messaging yang dikembangkan dengan bahasa
 							pemrograman Pascal.
-Fitur:						Berkirim pesan, chat room, contact management, file transfer,
+Fitur:						Berkirim pesan, chat room, contact management, file transfer, avatar, 
 							emoji, dan lain-lain.
 Aplikasi sejenis:			Skype, Telegram, dan lain-lain.
 Compiler:					Lazarus, FPC.

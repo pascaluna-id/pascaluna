@@ -1,0 +1,13 @@
+Pascaluna Server adalah console application yang dibuat dengan Lazarus.
+
+Flownya:
+
+1. 	Jalankan aplikasi.
+2. 	Aplikasi akan membuat server socket object, listening di port 7000.
+	Server socket akan menerima koneksi dari client, malakukan parsing
+	JSON text yang dikirim oleh client, untuk di proses.
+	JSON text yg dikirim kita sebut paket. Paket ini bisa berupa
+	perintah untuk server mengirimkan pesan dari user A ke user B,
+	validasi login, logout, atau apapun.
+3. 	Looping selamanya untuk menerima koneksi atau paket JSON dari client,
+	lalu memprosesnya.

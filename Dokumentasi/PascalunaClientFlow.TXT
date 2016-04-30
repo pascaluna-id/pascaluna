@@ -1,0 +1,12 @@
+Pascaluna Client adalah aplikasi yang dibuat dengan Lazarus (GUI).
+
+Flownya:
+
+1. 	Jalankan aplikasi.
+2. 	Aplikasi akan menampilkan dialog Input username.
+3.	User menekan tombol Join.
+4.	Aplikasi akan menampilkan chatroom screen seperti group di Telegram.
+	Semua user akan berkirim pesan di screen ini.
+	User bisa mengirim dan menerima pesan ke chatroom ini, semua orang
+	bisa melihat pesan yang kita kirim.
+	
