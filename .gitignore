@@ -1,3 +1,12 @@
 PascalunaServer/PascalunaServer.exe
 PascalunaServer/lib/x86_64-win64/PascalunaServer.compiled
 PascalunaServer/lib/x86_64-win64/PascalunaServer.o
+PascalunaServerWithGUI/lib/x86_64-win64/PascalunaServerWithGUI.compiled
+PascalunaServerWithGUI/lib/x86_64-win64/PascalunaServerWithGUI.o
+PascalunaServerWithGUI/lib/x86_64-win64/PascalunaServerWithGUI.obj
+PascalunaServerWithGUI/lib/x86_64-win64/PascalunaServerWithGUI.res
+PascalunaServerWithGUI/lib/x86_64-win64/unitmain.lfm
+PascalunaServerWithGUI/lib/x86_64-win64/unitmain.o
+PascalunaServerWithGUI/lib/x86_64-win64/unitmain.ppu
+PascalunaServerWithGUI/PascalunaServerWithGUI.exe
+PascalunaServer/lib/x86_64-win64/PascalunaServer.obj

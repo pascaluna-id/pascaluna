@@ -9,7 +9,7 @@
         <Filename Value="PascalunaServer.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos Y="86"/>
+        <CursorPos Y="87"/>
         <UsageCount Value="49"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -43,7 +43,7 @@
         <UsageCount Value="8"/>
       </Unit4>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
         <Filename Value="PascalunaServer.lpr"/>
         <Caret Line="9" Column="31"/>
@@ -156,10 +156,6 @@
         <Filename Value="PascalunaServer.lpr"/>
         <Caret Line="69" Column="47" TopLine="50"/>
       </Position28>
-      <Position29>
-        <Filename Value="PascalunaServer.lpr"/>
-        <Caret Line="87"/>
-      </Position29>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

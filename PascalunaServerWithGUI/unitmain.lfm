@@ -1,0 +1,31 @@
+object FormMain: TFormMain
+  Left = 634
+  Height = 504
+  Top = 185
+  Width = 587
+  Caption = 'PascalunaServerWithGUI'
+  ClientHeight = 504
+  ClientWidth = 587
+  OnCreate = FormCreate
+  Position = poDesktopCenter
+  LCLVersion = '1.6.0.4'
+  object MemoLogs: TMemo
+    Left = 0
+    Height = 504
+    Top = 0
+    Width = 587
+    Align = alClient
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object LTCPComponentServerSocket: TLTCPComponent
+    Port = 0
+    OnReceive = LTCPComponentServerSocketReceive
+    OnDisconnect = LTCPComponentServerSocketDisconnect
+    OnAccept = LTCPComponentServerSocketAccept
+    Timeout = 0
+    ReuseAddress = False
+    left = 80
+    top = 56
+  end
+end

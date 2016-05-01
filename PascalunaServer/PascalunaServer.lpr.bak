@@ -1,0 +1,87 @@
+{$mode objfpc}{$H+}
+02.
+03.uses
+04.  { 1 }
+05.  {$ifdef unix}cthreads,{$endif}
+06.  Classes,SysUtils,Sockets,fpAsync,fpSock;
+07.
+08.type
+09.  { 2 }
+10.  TClientHandlerThread = class(TThread)
+11.  private
+12.    FClientStream: TSocketStream;
+13.  public
+14.    constructor Create(AClientStream: TSocketStream);
+15.    procedure Execute; override;
+16.  end;
+17.  { 3 }
+18.  TTestServer = class(TTCPServer)
+19.  private
+20.    procedure TestOnConnect(Sender: TConnectionBasedSocket; AStream: TSocketStream);
+21.  public
+22.    constructor Create(AOwner: TComponent); override;
+23.  end;
+24.{ 4 }
+25.function AddrToString(Addr: TSockAddr): String;
+26.begin
+27.  Result := NetAddrToStr(Addr.sin_addr) + ':' + IntToStr(Addr.sin_port);
+28.end;
+29.
+30.{ TClientHandlerThread }
+31.{ 5 }
+32.constructor TClientHandlerThread.Create(AClientStream: TSocketStream);
+33.begin
+34.  inherited Create(false);
+35.  FreeOnTerminate := true;
+36.  FClientStream := AClientStream;
+37.end;
+38.{ 6 }
+39.procedure TClientHandlerThread.Execute;
+40.var
+41.  Msg : String;
+42.  Done: Boolean;
+43.begin
+44.  Done := false;
+45.  repeat
+46.    try
+47.      Msg := FClientStream.ReadAnsiString;
+48.      WriteLn(AddrToString(FClientStream.PeerAddress) + ': ' + Msg);
+49.    except
+50.      on e: EStreamError do begin
+51.        Done := true;
+52.      end;
+53.    end;
+54.  until Done;
+55.  WriteLn(AddrToString(FClientStream.PeerAddress) + ' disconnected');
+56.end;
+57.
+58.{ TTestServer }
+59.{ 7 }
+60.procedure TTestServer.TestOnConnect(Sender: TConnectionBasedSocket; AStream: TSocketStream);
+61.begin
+62.  WriteLn('Incoming connection from ' + AddrToString(AStream.PeerAddress));
+63.  TClientHandlerThread.Create(AStream);
+64.end;
+65.{ 8 }
+66.constructor TTestServer.Create(AOwner: TComponent);
+67.begin
+68.  inherited;
+69.  OnConnect := @TestOnConnect;
+70.end;
+71.
+72.{ main }
+73.{ 9 }
+74.var
+75.  ServerEventLoop: TEventLoop;
+76.begin
+77.  ServerEventLoop := TEventLoop.Create;
+78.  with TTestServer.Create(nil) do begin
+79.    EventLoop := ServerEventLoop;
+80.    Port := 12000;
+81.    WriteLn('Serving...');
+82.    Active := true;
+83.    EventLoop.Run;
+84.  end;
+85.  ServerEventLoop.Free;
+86.end.
+

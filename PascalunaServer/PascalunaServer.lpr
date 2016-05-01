@@ -1,77 +1,87 @@
-program PascalunaServer;
-
 {$mode objfpc}{$H+}
 
 uses
-  {$IFDEF UNIX}{$IFDEF UseCThreads}
-  cthreads,
-  {$ENDIF}{$ENDIF}
-  Classes, SysUtils, CustApp
-  { you can add units after this };
+  { 1 }
+  {$ifdef unix}cthreads,{$endif}
+  Classes,SysUtils,Sockets,fpAsync,fpSock;
 
 type
-
-  { TPascalunaServerApplication }
-
-  TPascalunaServerApplication = class(TCustomApplication)
-  protected
-    procedure DoRun; override;
+  { 2 }
+  TClientHandlerThread = class(TThread)
+  private
+    FClientStream: TSocketStream;
   public
-    constructor Create(TheOwner: TComponent); override;
-    destructor Destroy; override;
-    procedure WriteHelp; virtual;
+    constructor Create(AClientStream: TSocketStream);
+    procedure Execute; override;
   end;
+  { 3 }
+  TTestServer = class(TTCPServer)
+  private
+    procedure TestOnConnect(Sender: TConnectionBasedSocket; AStream: TSocketStream);
+  public
+    constructor Create(AOwner: TComponent); override;
+  end;
+{ 4 }
+function AddrToString(Addr: TSockAddr): String;
+begin
+  Result := NetAddrToStr(Addr.sin_addr) + ':' + IntToStr(Addr.sin_port);
+end;
 
-{ TPascalunaServerApplication }
-
-procedure TPascalunaServerApplication.DoRun;
+{ TClientHandlerThread }
+{ 5 }
+constructor TClientHandlerThread.Create(AClientStream: TSocketStream);
+begin
+  inherited Create(false);
+  FreeOnTerminate := true;
+  FClientStream := AClientStream;
+end;
+{ 6 }
+procedure TClientHandlerThread.Execute;
 var
-  ErrorMsg: String;
+  Msg : String;
+  Done: Boolean;
 begin
-  // quick check parameters
-  ErrorMsg:=CheckOptions('h', 'help');
-  if ErrorMsg<>'' then begin
-    ShowException(Exception.Create(ErrorMsg));
-    Terminate;
-    Exit;
-  end;
-
-  // parse parameters
-  if HasOption('h', 'help') then begin
-    WriteHelp;
-    Terminate;
-    Exit;
-  end;
-
-  { add your program here }
-
-  // stop program loop
-  Terminate;
+  Done := false;
+  repeat
+    try
+      Msg := FClientStream.ReadAnsiString;
+      WriteLn(AddrToString(FClientStream.PeerAddress) + ': ' + Msg);
+    except
+      on e: EStreamError do begin
+        Done := true;
+      end;
+    end;
+  until Done;
+  WriteLn(AddrToString(FClientStream.PeerAddress) + ' disconnected');
 end;
 
-constructor TPascalunaServerApplication.Create(TheOwner: TComponent);
+{ TTestServer }
+{ 7 }
+procedure TTestServer.TestOnConnect(Sender: TConnectionBasedSocket; AStream: TSocketStream);
 begin
-  inherited Create(TheOwner);
-  StopOnException:=True;
+  WriteLn('Incoming connection from ' + AddrToString(AStream.PeerAddress));
+  TClientHandlerThread.Create(AStream);
+end;
+{ 8 }
+constructor TTestServer.Create(AOwner: TComponent);
+begin
+  inherited;
+  OnConnect := @TestOnConnect;
 end;
 
-destructor TPascalunaServerApplication.Destroy;
-begin
-  inherited Destroy;
-end;
-
-procedure TPascalunaServerApplication.WriteHelp;
-begin
-  { add your help code here }
-  writeln('Usage: ', ExeName, ' -h');
-end;
-
+{ main }
+{ 9 }
 var
-  Application: TPascalunaServerApplication;
+  ServerEventLoop: TEventLoop;
 begin
-  Application:=TPascalunaServerApplication.Create(nil);
-  Application.Title:='PascalunaServer';
-  Application.Run;
-  Application.Free;
+  ServerEventLoop := TEventLoop.Create;
+  with TTestServer.Create(nil) do begin
+    EventLoop := ServerEventLoop;
+    Port := 12000;
+    WriteLn('Serving...');
+    Active := true;
+    EventLoop.Run;
+  end;
+  ServerEventLoop.Free;
 end.
 
