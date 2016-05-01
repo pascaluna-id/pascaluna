@@ -46,7 +46,7 @@ end;
 
 procedure TFormMain.LTCPComponentServerSocketReceive(aSocket: TLSocket);
 var
-	 buf : array[1..5] of Char;
+	 buf : array[1..4096] of Char;
    recvSize : Integer;
 begin
      repeat

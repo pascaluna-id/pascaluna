@@ -8,20 +8,20 @@
       <Unit0>
         <Filename Value="PascalunaServerWithGUI.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
+        <EditorIndex Value="1"/>
+        <CursorPos Y="20"/>
         <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="unitmain.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormMain"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="32"/>
-        <CursorPos Y="39"/>
+        <TopLine Value="37"/>
+        <CursorPos X="29" Y="49"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -29,7 +29,7 @@
       <Unit2>
         <Filename Value="C:\lazarus\components\lnet\lib\lnet.pp"/>
         <UnitName Value="lNet"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="114"/>
         <CursorPos X="28" Y="74"/>
         <UsageCount Value="10"/>
@@ -38,13 +38,13 @@
       <Unit3>
         <Filename Value="C:\lazarus\components\lnet\lib\levents.pp"/>
         <UnitName Value="lEvents"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <CursorPos X="3" Y="53"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit3>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
+    <JumpHistory Count="7" HistoryIndex="6">
       <Position1>
         <Filename Value="unitmain.pas"/>
       </Position1>
@@ -64,6 +64,13 @@
         <Filename Value="C:\lazarus\components\lnet\lib\lnet.pp"/>
         <Caret Line="74" Column="28" TopLine="66"/>
       </Position5>
+      <Position6>
+        <Filename Value="PascalunaServerWithGUI.lpr"/>
+      </Position6>
+      <Position7>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="45" Column="19" TopLine="32"/>
+      </Position7>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

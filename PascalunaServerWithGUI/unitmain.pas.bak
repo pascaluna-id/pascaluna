@@ -36,7 +36,6 @@ implementation
 
 procedure TFormMain.LTCPComponentServerSocketAccept(aSocket: TLSocket);
 begin
-  MemoLogs.Lines.Add(Format('[%d] connected.', [aSocket.SocketNet]));
   MemoLogs.Lines.Add('Client connected.');
 end;
 
